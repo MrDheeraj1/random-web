@@ -2,169 +2,272 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nap Coder — Portfolio</title>
-  <meta name="description" content="Nap Coder — clean, modern single-file HTML portfolio." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dheeraj Singh — Tech Portfolio</title>
+  <meta name="description" content="Dheeraj Singh (MrDheeraj1) — Java & MERN developer. Live GitHub data, projects, skills." />
   <style>
-    :root{
-      --bg:#0f1724;
-      --card:#0b1220;
-      --muted:#9aa6b2;
-      --accent:#6ee7b7;
-      --glass: rgba(255,255,255,0.04);
-      --maxw:1100px;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    /* --- Reset --- */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial; color:#dfefff; background:#05060a;}
+
+    /* --- Animated gradient background + subtle code rain --- */
+    .bg {
+      position:fixed;inset:0;z-index:-2;overflow:hidden;
+      background: radial-gradient(1000px 600px at 10% 20%, rgba(72,61,139,0.14), transparent),
+                  radial-gradient(800px 500px at 85% 80%, rgba(58,123,213,0.12), transparent),
+                  linear-gradient(120deg,#071126 0%, #0b1020 50%, #071029 100%);
     }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#08101a);color:#e6eef6}
-    .wrap{max-width:var(--maxw);margin:32px auto;padding:28px}
+    /* subtle moving gradient overlay */
+    .bg::after{
+      content:"";position:absolute;inset:0;background:linear-gradient(90deg, rgba(99,102,241,0.06), rgba(96,165,250,0.04), rgba(139,92,246,0.05));mix-blend-mode:screen;animation:floatBG 12s linear infinite;opacity:0.9}
+    @keyframes floatBG{0%{transform:translateX(-6%)}50%{transform:translateX(6%)}100%{transform:translateX(-6%)}}
 
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#60a5fa);display:flex;align-items:center;justify-content:center;font-weight:700;color:#042027}
-    h1{font-size:20px;margin:0}
-    nav a{color:var(--muted);text-decoration:none;margin-left:14px;font-size:14px}
-    nav a:hover{color:var(--accent)}
+    /* small matrix-like code rain (very subtle) */
+    .matrix{position:fixed;inset:0;z-index:-1;opacity:0.06;pointer-events:none;background-image:linear-gradient(transparent, transparent 2px, rgba(0,0,0,0.02) 2px), repeating-linear-gradient(0deg, rgba(0,255,170,0.02) 0 1px, transparent 1px 4px);background-size:100% 50px, 10px 100%;}
 
-    .hero{display:grid;grid-template-columns:1fr 360px;gap:24px;margin-top:28px;align-items:center}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:14px;box-shadow:0 6px 18px rgba(3,7,18,0.6);}
-    .hero-left h2{font-size:28px;margin:0 0 8px}
-    .hero-left p{color:var(--muted);line-height:1.5;margin:0 0 16px}
-    .cta-row{display:flex;gap:12px}
-    .btn{padding:10px 14px;border-radius:10px;background:var(--accent);color:#042027;font-weight:600;text-decoration:none}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+    /* --- Page layout --- */
+    .wrap{max-width:1100px;margin:48px auto;padding:28px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;gap:18px;align-items:center}
 
-    .stats{display:flex;gap:12px;margin-top:16px}
-    .stat{background:var(--glass);padding:10px;border-radius:10px;text-align:center;min-width:88px}
+    /* DS avatar */
+    .avatar{width:104px;height:104px;border-radius:16px;background:linear-gradient(135deg,#7c3aed,#0ea5e9);display:flex;align-items:center;justify-content:center;font-weight:800;color:#041025;font-size:30px;box-shadow:0 10px 30px rgba(2,6,23,0.6)}
+
+    .headline h1{font-size:22px;letter-spacing:0.4px}
+    .headline p{color:rgba(223,239,255,0.7);margin-top:6px}
+
+    nav a{color:rgba(223,239,255,0.7);text-decoration:none;margin-left:14px;font-weight:600}
+    nav a:hover{color:#9be7ff}
+
+    /* --- Hero --- */
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:26px;margin-top:28px;align-items:center}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:20px;backdrop-filter: blur(6px);box-shadow:0 8px 30px rgba(3,7,18,0.6)}
+
+    .intro h2{font-size:28px;margin-bottom:8px;background:linear-gradient(90deg,#7c3aed,#06b6d4);-webkit-background-clip:text;color:transparent}
+    .intro .typing{color:#cfefff;font-weight:600;margin-top:6px;min-height:28px}
+
+    .cta{display:flex;gap:12px;margin-top:16px}
+    .btn{padding:10px 14px;border-radius:10px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+    .btn.primary{background:linear-gradient(90deg,#7c3aed,#06b6d4);color:#041025}
+    .btn.ghost{border:1px solid rgba(255,255,255,0.06);color:rgba(223,239,255,0.9)}
+
+    /* stats */
+    .stats{display:flex;gap:12px;margin-top:18px}
+    .stat{flex:1;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));text-align:center}
     .stat b{display:block;font-size:18px}
-    .stat span{color:var(--muted);font-size:13px}
+    .muted{color:rgba(223,239,255,0.65);font-size:14px}
 
-    .profile{display:flex;flex-direction:column;align-items:center;padding:22px}
-    .avatar{width:120px;height:120px;border-radius:16px;background:linear-gradient(160deg,#123 40%, #234);display:flex;align-items:center;justify-content:center;font-size:40px}
-    .small p{color:var(--muted);font-size:14px;margin-top:12px;text-align:center}
+    /* skills */
+    .skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+    .skill{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.03);display:flex;align-items:center;gap:8px;font-weight:700;color:#cfefff;border:1px solid rgba(255,255,255,0.03)}
+    .badge{width:18px;height:18px;display:inline-grid;place-items:center;border-radius:4px;background:rgba(255,255,255,0.06);font-size:12px}
 
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
-    .feature h3{margin:0 0 8px}
-    .feature p{margin:0;color:var(--muted);font-size:14px}
+    /* projects */
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:18px}
+    .project{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));transition:transform .25s, box-shadow .25s}
+    .project:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
+    .project h4{color:#a5f3fc;margin-bottom:8px}
+    .project p{color:rgba(223,239,255,0.75);font-size:14px}
+    .project .meta{margin-top:10px;display:flex;justify-content:space-between;align-items:center}
+    .link{color:#7c3aed;text-decoration:none;font-weight:700}
 
-    section.projects{margin-top:26px}
-    .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-    .project{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.01))}
-    .project h4{margin:0 0 8px}
-    .project p{margin:0;color:var(--muted);font-size:14px}
+    /* contribution graph */
+    .contrib{margin-top:20px;text-align:center}
+    .contrib img{max-width:100%;border-radius:10px;border:1px solid rgba(255,255,255,0.04)}
 
-    footer{margin-top:36px;text-align:center;color:var(--muted);font-size:13px}
+    footer{margin-top:34px;text-align:center;color:rgba(223,239,255,0.6);font-size:13px}
 
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:repeat(2,1fr)}
-      .projects-grid{grid-template-columns:1fr}
-    }
-    @media (max-width:520px){
-      .grid{grid-template-columns:1fr}
-      header{flex-direction:column;align-items:flex-start}
-      nav{margin-top:10px}
-    }
+    /* animations */
+    .fade-in{opacity:0;transform:translateY(10px);transition:all .6s ease-out}
+    .fade-in.in{opacity:1;transform:translateY(0)}
+
+    /* responsive */
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.headline h1{font-size:20px}.avatar{width:88px;height:88px;font-size:24px}}
   </style>
 </head>
 <body>
+  <div class="bg"></div>
+  <div class="matrix"></div>
+
   <div class="wrap">
     <header>
       <div class="brand">
-        <div class="logo">NC</div>
-        <div>
-          <h1>Nap Coder</h1>
-          <div style="color:var(--muted);font-size:13px">I build simple code & clean UI</div>
+        <div class="avatar">DS</div>
+        <div class="headline">
+          <h1>Dheeraj Singh</h1>
+          <p class="muted">@MrDheeraj1 • B.Tech CSE (AKTU) • CGPA 7.7 • Graduating 2027</p>
         </div>
       </div>
       <nav>
-        <a href="#about">About</a>
         <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
 
-    <div class="hero">
-      <div class="card hero-left">
-        <h2>Hello — I’m Nap Coder.</h2>
-        <p>I design clean front-end pages. I solve problems with small, readable code. This single-file HTML shows a modern portfolio layout without any scripts.</p>
-        <div class="cta-row">
-          <a class="btn" href="#projects">See projects</a>
-          <a class="btn ghost" href="#contact">Get in touch</a>
+    <main>
+      <section class="hero">
+        <div class="panel intro fade-in" id="intro">
+          <h2>Building reliable systems, one line at a time</h2>
+          <div class="typing" id="typing"></div>
+
+          <div class="cta">
+            <a class="btn primary" href="#projects">Explore projects →</a>
+            <a class="btn ghost" href="https://github.com/MrDheeraj1" target="_blank">View GitHub</a>
+          </div>
+
+          <div class="stats" style="margin-top:18px">
+            <div class="stat"><b id="followers">--</b><div class="muted">Followers</div></div>
+            <div class="stat"><b id="repos">--</b><div class="muted">Public repos</div></div>
+            <div class="stat"><b id="years">2+</b><div class="muted">Projects (selected)</div></div>
+          </div>
+
+          <div style="margin-top:14px">
+            <div class="muted">Key technologies</div>
+            <div class="skills" id="skills">
+              <div class="skill"><span class="badge">J</span> Java</div>
+              <div class="skill"><span class="badge">N</span> Node.js</div>
+              <div class="skill"><span class="badge">R</span> React</div>
+              <div class="skill"><span class="badge">E</span> Express</div>
+              <div class="skill"><span class="badge">M</span> MongoDB</div>
+              <div class="skill"><span class="badge">A</span> Arduino</div>
+            </div>
+          </div>
         </div>
 
-        <div class="stats">
-          <div class="stat">
-            <b>120+</b>
-            <span>Hours coded</span>
+        <aside class="panel fade-in" id="side">
+          <h3 style="margin-bottom:8px;color:#a5f3fc">Quick profile</h3>
+          <p class="muted" style="font-size:14px;line-height:1.5">Dheeraj Singh — B.Tech CSE (AKTU). Projects: wireless charging, Tesla Tower, solar tracker, horizontal wind turbine, To-Do Web App, DocOnCall, Java practice repo. Passionate about embedded systems and full-stack web development.</p>
+
+          <div style="margin-top:14px">
+            <a class="link" href="https://github.com/MrDheeraj1" target="_blank">Open GitHub profile</a>
           </div>
-          <div class="stat">
-            <b>15</b>
-            <span>Mini projects</span>
+
+          <div class="contrib" style="margin-top:18px">
+            <div class="muted">Contribution activity</div>
+            <img src="https://ghchart.rshah.org/2a5298/MrDheeraj1" alt="Contributions graph">
           </div>
-          <div class="stat">
-            <b>5</b>
-            <span>Open-source</span>
+        </aside>
+      </section>
+
+      <section id="projects">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid fade-in" id="projectsGrid">
+          <div style="grid-column:1/-1;text-align:center;color:rgba(223,239,255,0.7)">Loading projects…</div>
+        </div>
+      </section>
+
+      <section id="skills" style="margin-top:28px">
+        <h2>Skills & Tools</h2>
+        <div class="panel fade-in" style="margin-top:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+          <!-- Tech badges with techy glow -->
+          <div class="skill" style="padding:10px 14px;box-shadow:0 6px 20px rgba(124,58,237,0.08);border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.015),rgba(255,255,255,0.01));">
+            <span class="badge">☕</span> Java
+          </div>
+          <div class="skill" style="padding:10px 14px;box-shadow:0 6px 20px rgba(6,182,212,0.06);border-radius:12px;">
+            <span class="badge">node</span> Node.js
+          </div>
+          <div class="skill" style="padding:10px 14px;box-shadow:0 6px 20px rgba(96,165,250,0.06);border-radius:12px;">
+            <span class="badge">⚛</span> React
+          </div>
+          <div class="skill" style="padding:10px 14px;box-shadow:0 6px 20px rgba(34,197,94,0.06);border-radius:12px;">
+            <span class="badge">DB</span> MongoDB
+          </div>
+          <div class="skill" style="padding:10px 14px;box-shadow:0 6px 20px rgba(234,88,12,0.06);border-radius:12px;">
+            <span class="badge">⚡</span> Arduino
           </div>
         </div>
+      </section>
 
-        <section id="about" class="projects" aria-labelledby="about-title">
-          <h3 id="about-title">About</h3>
-          <p style="color:var(--muted);margin-top:8px;">I like small, focused projects. I prefer readable HTML and maintainable styles. This page is intentionally simple so you can copy it, edit it, and reuse it.</p>
-        </section>
-      </div>
-
-      <aside class="card profile">
-        <div class="avatar">🙂</div>
-        <h3 style="margin:12px 0 4px">Nap Coder</h3>
-        <div class="small">
-          <p>Front-end Dev • Learning Java • Loves simple designs</p>
+      <section id="contact" style="margin-top:28px">
+        <h2>Contact</h2>
+        <div class="panel fade-in" style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <div>
+            <div class="muted">Email</div>
+            <div style="margin-top:6px"><a class="link" href="mailto:youremail@example.com">youremail@example.com</a></div>
+          </div>
+          <div>
+            <div class="muted">LinkedIn / Social</div>
+            <div style="margin-top:6px"><a class="link" href="#">linkedin.com/in/yourprofile</a></div>
+          </div>
+          <div>
+            <div class="muted">Resume</div>
+            <div style="margin-top:6px"><a class="link" href="#">Download CV</a></div>
+          </div>
         </div>
-      </aside>
-    </div>
+      </section>
 
-    <div class="grid">
-      <div class="card feature">
-        <h3>Clean HTML</h3>
-        <p>Easy to read. Easy to edit. No frameworks required.</p>
-      </div>
-      <div class="card feature">
-        <h3>Responsive</h3>
-        <p>Looks good on phones and desktops. Uses modern layout techniques.</p>
-      </div>
-      <div class="card feature">
-        <h3>Accessible</h3>
-        <p>Simple structure, clear headings, and meaningful links.</p>
-      </div>
-    </div>
-
-    <section id="projects" class="projects">
-      <h3 style="margin-bottom:12px">Featured projects</h3>
-      <div class="projects-grid">
-        <article class="project">
-          <h4>Daily Java Practice</h4>
-          <p>Collection of solved problems and small exercises. Each file focuses on one concept.</p>
-        </article>
-        <article class="project">
-          <h4>Animated Repo Page</h4>
-          <p>Animated HTML that presents a repo summary. Designed to impress on GitHub.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="contact" style="margin-top:18px">
-      <div class="card">
-        <h3>Contact</h3>
-        <p style="color:var(--muted);margin-top:6px">Want this template adapted? Copy this file and edit. Use the contact line below to simulate a message.</p>
-        <p style="margin-top:12px;color:var(--muted)"><strong>Email:</strong> hello@napcoder.example</p>
-        <p style="margin-top:6px;color:var(--muted)"><strong>Twitter:</strong> @nap_coder</p>
-      </div>
-    </section>
+    </main>
 
     <footer>
-      <div>Made with ♥ — single-file HTML • Edit freely</div>
-      <div style="margin-top:6px;color:var(--muted)">© <span id="year">2025</span> Nap Coder</div>
+      <div class="muted">© 2025 Dheeraj Singh — Built with HTML, CSS & small JS • Live GitHub data</div>
     </footer>
   </div>
+
+  <script>
+    // Typing effect (multiple phrases)
+    const phrases = [
+      'I build scalable web apps.',
+      'I write clean, testable Java code.',
+      'I prototype hardware projects with Arduino.',
+      'I ship features, not excuses.'
+    ];
+    const typingEl = document.getElementById('typing');
+    let pi = 0, ci = 0, forward = true;
+    function typeLoop(){
+      const current = phrases[pi];
+      if(forward){
+        ci++;
+        typingEl.textContent = current.slice(0,ci);
+        if(ci===current.length){forward=false;setTimeout(typeLoop,1200);return}
+      } else {
+        ci--; typingEl.textContent = current.slice(0,ci);
+        if(ci===0){forward=true;pi=(pi+1)%phrases.length}
+      }
+      setTimeout(typeLoop, forward?80:30);
+    }
+    typeLoop();
+
+    // Intersection observer for fade-in
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in')} });
+    },{threshold:0.12});
+    document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+    // Fetch GitHub data and populate projects
+    async function loadGitHub(){
+      try{
+        const user = 'MrDheeraj1';
+        const ures = await fetch(`https://api.github.com/users/${user}`);
+        const u = await ures.json();
+        document.getElementById('followers').textContent = u.followers ?? '--';
+        document.getElementById('repos').textContent = u.public_repos ?? '--';
+
+        const rres = await fetch(`https://api.github.com/users/${user}/repos?per_page=12&sort=updated`);
+        const repos = await rres.json();
+        const grid = document.getElementById('projectsGrid');
+        grid.innerHTML = '';
+
+        // choose top repos by stargazers_count and recent update
+        repos.sort((a,b)=> (b.stargazers_count - a.stargazers_count) || (new Date(b.updated_at)- new Date(a.updated_at)) );
+        const top = repos.slice(0,8);
+
+        top.forEach(r=>{
+          const el = document.createElement('div'); el.className='project';
+          const desc = r.description? r.description : '<span style="color:rgba(223,239,255,0.55)">No description</span>';
+          el.innerHTML = `\
+            <h4>${r.name}</h4>\
+            <p>${desc}</p>\
+            <div class='meta'>\
+              <div style="font-size:13px;color:rgba(223,239,255,0.7)">★ ${r.stargazers_count} • Forks ${r.forks_count}</div>\
+              <div><a class='link' href='${r.html_url}' target='_blank'>View Code ↗</a></div>\
+            </div>`;
+          grid.appendChild(el);
+        });
+      }catch(err){console.error(err); document.getElementById('projectsGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;color:rgba(223,239,255,0.7)">Could not load projects</div>'}
+    }
+    loadGitHub();
+  </script>
 </body>
 </html>
