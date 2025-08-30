@@ -1,47 +1,170 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Responsive Landing Page</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nap Coder — Portfolio</title>
+  <meta name="description" content="Nap Coder — clean, modern single-file HTML portfolio." />
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa6b2;
+      --accent:#6ee7b7;
+      --glass: rgba(255,255,255,0.04);
+      --maxw:1100px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#08101a);color:#e6eef6}
+    .wrap{max-width:var(--maxw);margin:32px auto;padding:28px}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#60a5fa);display:flex;align-items:center;justify-content:center;font-weight:700;color:#042027}
+    h1{font-size:20px;margin:0}
+    nav a{color:var(--muted);text-decoration:none;margin-left:14px;font-size:14px}
+    nav a:hover{color:var(--accent)}
+
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:24px;margin-top:28px;align-items:center}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:14px;box-shadow:0 6px 18px rgba(3,7,18,0.6);}
+    .hero-left h2{font-size:28px;margin:0 0 8px}
+    .hero-left p{color:var(--muted);line-height:1.5;margin:0 0 16px}
+    .cta-row{display:flex;gap:12px}
+    .btn{padding:10px 14px;border-radius:10px;background:var(--accent);color:#042027;font-weight:600;text-decoration:none}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    .stats{display:flex;gap:12px;margin-top:16px}
+    .stat{background:var(--glass);padding:10px;border-radius:10px;text-align:center;min-width:88px}
+    .stat b{display:block;font-size:18px}
+    .stat span{color:var(--muted);font-size:13px}
+
+    .profile{display:flex;flex-direction:column;align-items:center;padding:22px}
+    .avatar{width:120px;height:120px;border-radius:16px;background:linear-gradient(160deg,#123 40%, #234);display:flex;align-items:center;justify-content:center;font-size:40px}
+    .small p{color:var(--muted);font-size:14px;margin-top:12px;text-align:center}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+    .feature h3{margin:0 0 8px}
+    .feature p{margin:0;color:var(--muted);font-size:14px}
+
+    section.projects{margin-top:26px}
+    .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .project{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.01))}
+    .project h4{margin:0 0 8px}
+    .project p{margin:0;color:var(--muted);font-size:14px}
+
+    footer{margin-top:36px;text-align:center;color:var(--muted);font-size:13px}
+
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .projects-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:520px){
+      .grid{grid-template-columns:1fr}
+      header{flex-direction:column;align-items:flex-start}
+      nav{margin-top:10px}
+    }
+  </style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="logo">MyLogo</div>
-    <nav class="navbar">
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Services</a>
-      <a href="#">Contact</a>
-    </nav>
-    <div class="menu-toggle">&#9776;</div>
-  </header>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">NC</div>
+        <div>
+          <h1>Nap Coder</h1>
+          <div style="color:var(--muted);font-size:13px">I build simple code & clean UI</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Welcome to Our Website</h1>
-    <p>Your one-stop solution for web development.</p>
-    <a href="#" class="btn">Get Started</a>
-  </section>
+    <div class="hero">
+      <div class="card hero-left">
+        <h2>Hello — I’m Nap Coder.</h2>
+        <p>I design clean front-end pages. I solve problems with small, readable code. This single-file HTML shows a modern portfolio layout without any scripts.</p>
+        <div class="cta-row">
+          <a class="btn" href="#projects">See projects</a>
+          <a class="btn ghost" href="#contact">Get in touch</a>
+        </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>Follow us on:</p>
-    <div class="social">
-      <a href="#" target="_blank">Facebook</a>
-      <a href="#" target="_blank">Twitter</a>
-      <a href="#" target="_blank">Instagram</a>
+        <div class="stats">
+          <div class="stat">
+            <b>120+</b>
+            <span>Hours coded</span>
+          </div>
+          <div class="stat">
+            <b>15</b>
+            <span>Mini projects</span>
+          </div>
+          <div class="stat">
+            <b>5</b>
+            <span>Open-source</span>
+          </div>
+        </div>
+
+        <section id="about" class="projects" aria-labelledby="about-title">
+          <h3 id="about-title">About</h3>
+          <p style="color:var(--muted);margin-top:8px;">I like small, focused projects. I prefer readable HTML and maintainable styles. This page is intentionally simple so you can copy it, edit it, and reuse it.</p>
+        </section>
+      </div>
+
+      <aside class="card profile">
+        <div class="avatar">🙂</div>
+        <h3 style="margin:12px 0 4px">Nap Coder</h3>
+        <div class="small">
+          <p>Front-end Dev • Learning Java • Loves simple designs</p>
+        </div>
+      </aside>
     </div>
-  </footer>
 
-  <script>
-    const toggle = document.querySelector('.menu-toggle');
-    const navbar = document.querySelector('.navbar');
-    toggle.addEventListener('click', () => {
-      navbar.classList.toggle('show');
-    });
-  </script>
+    <div class="grid">
+      <div class="card feature">
+        <h3>Clean HTML</h3>
+        <p>Easy to read. Easy to edit. No frameworks required.</p>
+      </div>
+      <div class="card feature">
+        <h3>Responsive</h3>
+        <p>Looks good on phones and desktops. Uses modern layout techniques.</p>
+      </div>
+      <div class="card feature">
+        <h3>Accessible</h3>
+        <p>Simple structure, clear headings, and meaningful links.</p>
+      </div>
+    </div>
+
+    <section id="projects" class="projects">
+      <h3 style="margin-bottom:12px">Featured projects</h3>
+      <div class="projects-grid">
+        <article class="project">
+          <h4>Daily Java Practice</h4>
+          <p>Collection of solved problems and small exercises. Each file focuses on one concept.</p>
+        </article>
+        <article class="project">
+          <h4>Animated Repo Page</h4>
+          <p>Animated HTML that presents a repo summary. Designed to impress on GitHub.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" style="margin-top:18px">
+      <div class="card">
+        <h3>Contact</h3>
+        <p style="color:var(--muted);margin-top:6px">Want this template adapted? Copy this file and edit. Use the contact line below to simulate a message.</p>
+        <p style="margin-top:12px;color:var(--muted)"><strong>Email:</strong> hello@napcoder.example</p>
+        <p style="margin-top:6px;color:var(--muted)"><strong>Twitter:</strong> @nap_coder</p>
+      </div>
+    </section>
+
+    <footer>
+      <div>Made with ♥ — single-file HTML • Edit freely</div>
+      <div style="margin-top:6px;color:var(--muted)">© <span id="year">2025</span> Nap Coder</div>
+    </footer>
+  </div>
 </body>
 </html>
